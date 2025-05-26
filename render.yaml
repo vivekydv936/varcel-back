@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: feedback-hub-backend
+    env: python
+    buildCommand: |
+      apt-get update && apt-get install -y build-essential python3.11 python3.11-dev
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      source $HOME/.cargo/env
+      rustup default stable
+      python3.11 -m pip install --upgrade pip
+      python3.11 -m pip install -r requirements.txt
+    startCommand: python3.11 -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: APP_NAME
+        value: Hackathon FastAPI Backend
+      - key: API_VERSION
+        value: v1
+      - key: MONGODB_URI
+        sync: false 
