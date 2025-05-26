@@ -33,6 +33,17 @@ app.get('/', (req, res) => {
   res.send({
     activeStatus: true,
     error: false,
+    message: 'Server is running',
+    data: null,
+    statusCode: 200,
+    timestamp: new Date().toISOString(),
+    path: req.originalUrl,
+    method: req.method,
+    headers: req.headers,
+    body: req.body,
+    query: req.query,
+    params: req.params,
+    
   });
 });
 
